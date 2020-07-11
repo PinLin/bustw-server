@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, HttpService } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as CryptoJS from 'crypto-js';
+import { PtxDataVersion } from './model/ptx-data-version.model';
 
 @Injectable()
 export class PtxService {
+  private readonly logger = new Logger(PtxService.name);
+
   constructor(
     private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
   ) { }
 
   generateHeaders() {
@@ -21,5 +25,25 @@ export class PtxService {
       authorization: `hmac username="${appId}", algorithm="hmac-sha1", headers="x-date", signature="${hmac}"`,
       'x-date': dateString,
     };
+  }
+
+  getCityPath(city: string) {
+    if (city === 'InterCity') {
+      return 'InterCity';
+    }
+    return `City/${city}`
+  }
+
+  async fetchPtxDataVersion(city: string) {
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/DataVersion/${this.getCityPath(city)}?$format=JSON`;
+    const headers = this.generateHeaders();
+
+    try {
+      const response = await this.httpService.get(url, { headers }).toPromise();
+      this.logger.log(`Fetched DataVersion of ${city}`);
+      return response.data as PtxDataVersion;
+    } catch (e) {
+      this.logger.error(`Failed to fetch DataVersion of ${city}`);
+    }
   }
 }
