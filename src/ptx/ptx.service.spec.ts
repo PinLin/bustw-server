@@ -52,4 +52,27 @@ describe('PtxService', () => {
     expect(busRoute.City).toBeDefined();
     expect(busRoute.VersionID).toBeDefined();
   });
+
+  it('should fetchPtxBusStopsOfRoute correctly', async () => {
+    const result = await service.fetchPtxBusStopsOfRoute('Keelung');
+    expect(result).toBeDefined();
+    expect(result.length).toBeGreaterThan(0);
+
+    const busRoute = result[0];
+    expect(busRoute.RouteUID).toBeDefined();
+    expect(busRoute.RouteName).toBeDefined();
+    expect(busRoute.SubRouteUID).toBeDefined();
+    expect(busRoute.SubRouteName).toBeDefined();
+    expect(busRoute.Direction).toBeDefined();
+    expect(busRoute.City).toBeDefined();
+    expect(busRoute.Stops).toBeDefined();
+    expect(busRoute.Stops.length).toBeGreaterThan(0);
+
+    const busStop = busRoute.Stops[0];
+    expect(busStop.StopUID).toBeDefined();
+    expect(busStop.StopName).toBeDefined();
+    expect(busStop.StopSequence).toBeDefined();
+
+    expect(busRoute.VersionID).toBeDefined();
+  });
 });

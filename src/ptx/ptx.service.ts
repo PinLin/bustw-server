@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import * as CryptoJS from 'crypto-js';
 import { PtxDataVersion } from './model/ptx-data-version.model';
 import { PtxBusRoute } from './model/ptx-bus-route.model';
+import { PtxBusStopOfRoute } from './model/ptx-bus-stop-of-route.model';
 
 @Injectable()
 export class PtxService {
@@ -58,6 +59,19 @@ export class PtxService {
       return response.data as PtxBusRoute[];
     } catch (e) {
       this.logger.error(`Failed to fetch BusRoute of ${city}`);
+    }
+  }
+
+  async fetchPtxBusStopsOfRoute(city: string) {
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/${this.getCityPath(city)}?$format=JSON`;
+    const headers = this.generateHeaders();
+
+    try {
+      const response = await this.httpService.get(url, { headers }).toPromise();
+      this.logger.log(`Fetched BusStopOfRoute of ${city}`);
+      return response.data as PtxBusStopOfRoute[];
+    } catch (e) {
+      this.logger.error(`Failed to fetch BusStopOfRoute of ${city}`);
     }
   }
 }
