@@ -75,4 +75,21 @@ describe('PtxService', () => {
 
     expect(busRoute.VersionID).toBeDefined();
   });
+
+  it('should fetchPtxBusEstimatedTimeOfArrival correctly', async () => {
+    const result = await service.fetchPtxBusEstimatedTimeOfArrival('Keelung');
+    expect(result).toBeDefined();
+    expect(result.length).toBeGreaterThan(0);
+
+    const busStop = result[0];
+    expect(busStop.RouteUID).toBeDefined();
+    expect(busStop.RouteName).toBeDefined();
+    expect(busStop.SubRouteUID).toBeDefined();
+    expect(busStop.SubRouteName).toBeDefined();
+    expect(busStop.Direction).toBeDefined();
+    expect(busStop.StopUID).toBeDefined();
+    expect(busStop.StopName).toBeDefined();
+    expect(busStop.StopSequence).toBeDefined();
+    expect(busStop.StopStatus).toBeDefined();
+  });
 });

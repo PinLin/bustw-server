@@ -4,6 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { PtxDataVersion } from './model/ptx-data-version.model';
 import { PtxBusRoute } from './model/ptx-bus-route.model';
 import { PtxBusStopOfRoute } from './model/ptx-bus-stop-of-route.model';
+import { PtxBusEstimatedTimeOfArrival } from './model/ptx-bus-estimated-time-of-arrival.model';
 
 @Injectable()
 export class PtxService {
@@ -72,6 +73,19 @@ export class PtxService {
       return response.data as PtxBusStopOfRoute[];
     } catch (e) {
       this.logger.error(`Failed to fetch BusStopOfRoute of ${city}`);
+    }
+  }
+
+  async fetchPtxBusEstimatedTimeOfArrival(city: string) {
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/${this.getCityPath(city)}?$format=JSON`;
+    const headers = this.generateHeaders();
+
+    try {
+      const response = await this.httpService.get(url, { headers }).toPromise();
+      this.logger.log(`Fetched BusEstimatedTimeOfArrival of ${city}`);
+      return response.data as PtxBusEstimatedTimeOfArrival[];
+    } catch (e) {
+      this.logger.error(`Failed to fetch BusEstimatedTimeOfArrival of ${city}`);
     }
   }
 }
