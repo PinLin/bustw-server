@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PtxService } from 'src/ptx/ptx.service';
+import { PtxService } from '../ptx/ptx.service';
 import { DataVersion } from './model/data-version.model';
 
 @Injectable()
