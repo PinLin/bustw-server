@@ -11,7 +11,6 @@ export class BusRouteService {
 
   async getBusRoutes(city: string) {
     const ptxBusRoutes = await this.ptxService.fetchPtxBusRoutes(city);
-    if (!ptxBusRoutes) return;
     return ptxBusRoutes.map((ptxBusRoute) => ({
       id: ptxBusRoute.RouteUID,
       nameZhTw: ptxBusRoute.RouteName.Zh_tw,
