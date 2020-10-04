@@ -76,7 +76,7 @@ export class PtxService {
     }
   }
 
-  async fetchPtxBusEstimatedTimeOfArrival(city: string) {
+  async fetchPtxBusEstimatedTimesOfArrival(city: string) {
     const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/${this.getCityPath(city)}?$format=JSON`;
     const headers = this.generateHeaders();
 

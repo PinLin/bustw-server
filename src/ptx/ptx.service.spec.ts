@@ -77,7 +77,7 @@ describe('PtxService', () => {
   });
 
   it('should fetchPtxBusEstimatedTimeOfArrival correctly', async () => {
-    const result = await service.fetchPtxBusEstimatedTimeOfArrival('Keelung');
+    const result = await service.fetchPtxBusEstimatedTimesOfArrival('Keelung');
     expect(result).toBeDefined();
     expect(result.length).toBeGreaterThan(0);
 
