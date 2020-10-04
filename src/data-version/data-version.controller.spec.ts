@@ -19,11 +19,4 @@ describe('DataVersion Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-
-  it('should getDateVersion correctly', async () => {
-    const result = await controller.getDateVersion('Keelung');
-    expect(result).toBeDefined();
-    expect(result.versionId).toBeDefined();
-    expect(result.updateTime).toBeDefined();
-  });
 });
