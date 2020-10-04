@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PtxService } from '../ptx/ptx.service';
 import { BusRoute } from './model/bus-route.model';
+import { BusStop } from './model/bus-stop.model';
 import { BusSubRoute } from './model/bus-sub-route.model';
 
 @Injectable()
@@ -10,7 +11,30 @@ export class BusRouteService {
   ) { }
 
   async getBusRoutes(city: string) {
-    const ptxBusRoutes = await this.ptxService.fetchPtxBusRoutes(city);
+    const [ptxBusRoutes, ptxBusStopsOfRoute] = await Promise.all([
+      await this.ptxService.fetchPtxBusRoutes(city),
+      await this.ptxService.fetchPtxBusStopsOfRoute(city),
+    ]);
+
+    // 把 ptxBusStopsOfRoute 整理成 busStopDict
+    let busStopDict = {} as { [subRouteId: string]: { [direction: string]: BusStop[] } };
+    ptxBusStopsOfRoute.map((ptxBusStopOfRoute) => {
+      const subRouteId = ptxBusStopOfRoute.SubRouteUID;
+      const direction = ptxBusStopOfRoute.Direction;
+      const stops = ptxBusStopOfRoute.Stops.map((ptxBusStop) => ({
+        id: ptxBusStop.StopUID,
+        sequence: ptxBusStop.StopSequence,
+        nameZhTw: ptxBusStop.StopName.Zh_tw,
+        nameEn: ptxBusStop.StopName.En,
+      } as BusStop));
+
+      if (busStopDict[subRouteId]) {
+        busStopDict[subRouteId][direction] = stops;
+      } else {
+        busStopDict[subRouteId] = { [direction]: stops };
+      }
+    });
+
     return ptxBusRoutes.map((ptxBusRoute) => ({
       id: ptxBusRoute.RouteUID,
       nameZhTw: ptxBusRoute.RouteName.Zh_tw,
@@ -26,6 +50,7 @@ export class BusRouteService {
         direction: ptxBusSubRoute.Direction,
         nameZhTw: ptxBusSubRoute.SubRouteName.Zh_tw,
         nameEn: ptxBusSubRoute.SubRouteName.En,
+        stops: busStopDict[ptxBusSubRoute.SubRouteUID][ptxBusSubRoute.Direction],
       } as BusSubRoute)),
     } as BusRoute));
   }

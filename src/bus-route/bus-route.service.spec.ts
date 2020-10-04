@@ -41,5 +41,13 @@ describe('BusRouteService', () => {
     expect(subRoute.direction).toBeDefined();
     expect(subRoute.nameZhTw).toBeDefined();
     expect(subRoute.nameEn).toBeDefined();
+    expect(subRoute.stops).toBeDefined();
+    expect(subRoute.stops.length).toBeGreaterThan(0);
+
+    const stop = subRoute.stops[0];
+    expect(stop.id).toBeDefined();
+    expect(stop.sequence).toBeDefined();
+    expect(stop.nameZhTw).toBeDefined();
+    expect(stop.nameEn).toBeDefined();
   });
 });
