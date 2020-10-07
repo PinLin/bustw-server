@@ -32,7 +32,6 @@ describe('BusRouteService', () => {
     expect(busRoute.destinationStopNameZhTw).toBeDefined();
     expect(busRoute.destinationStopNameEn).toBeDefined();
     expect(busRoute.city).toBeDefined();
-    expect(busRoute.versionId).toBeDefined();
     expect(busRoute.subRoutes).toBeDefined();
     expect(busRoute.subRoutes.length).toBeGreaterThan(0);
 

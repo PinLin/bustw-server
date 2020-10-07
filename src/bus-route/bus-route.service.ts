@@ -44,7 +44,6 @@ export class BusRouteService {
       destinationStopNameZhTw: ptxBusRoute.DestinationStopNameZh,
       destinationStopNameEn: ptxBusRoute.DestinationStopNameEn,
       city: ptxBusRoute.City || 'InterCity',
-      versionId: ptxBusRoute.VersionID,
       subRoutes: ptxBusRoute.SubRoutes.map((ptxBusSubRoute) => ({
         id: ptxBusSubRoute.SubRouteUID,
         direction: ptxBusSubRoute.Direction,

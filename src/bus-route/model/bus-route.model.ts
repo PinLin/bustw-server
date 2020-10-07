@@ -9,6 +9,5 @@ export class BusRoute {
   destinationStopNameZhTw?: string;
   destinationStopNameEn?: string;
   city?: string;
-  versionId: number;
   subRoutes: BusSubRoute[];
 }
