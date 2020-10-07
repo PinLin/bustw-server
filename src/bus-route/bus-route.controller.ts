@@ -17,6 +17,8 @@ export class BusRouteController {
     if (!busRoutes) {
       throw new BadGatewayException();
     }
-    return busRoutes;
+    return {
+      routes: busRoutes,
+    };
   }
 }
