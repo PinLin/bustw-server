@@ -13,10 +13,10 @@ export class BusRouteController {
       throw new ForbiddenException();
     }
 
-    const data = await this.busRouteService.getBusRoutes(city);
-    if (!data) {
+    const busRoutes = await this.busRouteService.getBusRoutes(city);
+    if (!busRoutes) {
       throw new BadGatewayException();
     }
-    return data;
+    return busRoutes;
   }
 }

@@ -13,10 +13,10 @@ export class DataVersionController {
       throw new ForbiddenException();
     }
 
-    const data = await this.dataVersionService.getDataVersion(city);
-    if (!data) {
+    const dataVersion = await this.dataVersionService.getDataVersion(city);
+    if (!dataVersion) {
       throw new BadGatewayException();
     }
-    return data;
+    return dataVersion;
   }
 }

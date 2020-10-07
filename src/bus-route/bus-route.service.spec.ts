@@ -19,11 +19,11 @@ describe('BusRouteService', () => {
   });
 
   it('should getBusRoutes correctly', async () => {
-    const result = await service.getBusRoutes('Keelung');
-    expect(result).toBeDefined();
-    expect(result.length).toBeGreaterThan(0);
+    const busRoutes = await service.getBusRoutes('Keelung');
+    expect(busRoutes).toBeDefined();
+    expect(busRoutes.length).toBeGreaterThan(0);
 
-    const busRoute = result[0];
+    const busRoute = busRoutes[0];
     expect(busRoute.id).toBeDefined();
     expect(busRoute.nameZhTw).toBeDefined();
     expect(busRoute.nameEn).toBeDefined();

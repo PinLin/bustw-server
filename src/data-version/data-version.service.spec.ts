@@ -19,9 +19,9 @@ describe('DataVersionService', () => {
   });
 
   it('should getDataVersion correctly', async () => {
-    const result = await service.getDataVersion('Keelung');
-    expect(result).toBeDefined();
-    expect(result.versionId).toBeDefined();
-    expect(result.updateTime).toBeDefined();
+    const dataVersion = await service.getDataVersion('Keelung');
+    expect(dataVersion).toBeDefined();
+    expect(dataVersion.versionId).toBeDefined();
+    expect(dataVersion.updateTime).toBeDefined();
   });
 });
