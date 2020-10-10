@@ -16,7 +16,7 @@ export class BusRouteService {
       await this.ptxService.fetchPtxBusStopOfRouteSet(city),
     ]);
 
-    // 把 ptxBusStopsOfRoute 整理成 busStopDict
+    // 把 ptxBusStopOfRouteSet 整理成 busStopDict
     let busStopDict = {} as { [subRouteId: string]: { [direction: string]: BusStop[] } };
     ptxBusStopOfRouteSet.map((ptxBusStopOfRoute) => {
       const subRouteId = ptxBusStopOfRoute.SubRouteUID;
@@ -28,10 +28,10 @@ export class BusRouteService {
         nameEn: ptxBusStop.StopName.En,
       } as BusStop));
 
-      if (busStopDict[subRouteId]) {
-        busStopDict[subRouteId][direction] = stops;
-      } else {
+      if (!busStopDict[subRouteId]) {
         busStopDict[subRouteId] = { [direction]: stops };
+      } else {
+        busStopDict[subRouteId][direction] = stops;
       }
     });
 
@@ -43,7 +43,7 @@ export class BusRouteService {
       departureStopNameEn: ptxBusRoute.DepartureStopNameEn,
       destinationStopNameZhTw: ptxBusRoute.DestinationStopNameZh,
       destinationStopNameEn: ptxBusRoute.DestinationStopNameEn,
-      city: ptxBusRoute.City || 'InterCity',
+      city: ptxBusRoute.City ?? 'InterCity',
       subRoutes: ptxBusRoute.SubRoutes.map((ptxBusSubRoute) => ({
         id: ptxBusSubRoute.SubRouteUID,
         direction: ptxBusSubRoute.Direction,
