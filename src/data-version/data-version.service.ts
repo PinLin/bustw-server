@@ -10,6 +10,7 @@ export class DataVersionService {
 
   async getDataVersion(city: string) {
     const ptxDataVersion = await this.ptxService.fetchPtxDataVersion(city);
+
     return {
       versionId: ptxDataVersion.VersionID,
       updateTime: new Date(ptxDataVersion.UpdateTime),

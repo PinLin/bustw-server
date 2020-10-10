@@ -50,7 +50,7 @@ export class PtxService {
     }
   }
 
-  async fetchPtxBusRoutes(city: string) {
+  async fetchPtxBusRouteSet(city: string) {
     const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/${this.getCityPath(city)}?$format=JSON`;
     const headers = this.generateHeaders();
 
@@ -63,7 +63,7 @@ export class PtxService {
     }
   }
 
-  async fetchPtxBusStopsOfRoute(city: string) {
+  async fetchPtxBusStopOfRouteSet(city: string) {
     const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/${this.getCityPath(city)}?$format=JSON`;
     const headers = this.generateHeaders();
 
@@ -76,7 +76,7 @@ export class PtxService {
     }
   }
 
-  async fetchPtxBusEstimatedTimesOfArrival(city: string) {
+  async fetchPtxBusEstimatedTimeOfArrivalSet(city: string) {
     const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/${this.getCityPath(city)}?$format=JSON`;
     const headers = this.generateHeaders();
 

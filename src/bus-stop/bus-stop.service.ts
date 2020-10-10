@@ -10,9 +10,9 @@ export class BusStopService {
   ) { }
 
   async getBusStops(city: string) {
-    const ptxBusEstimatedTimesOfArrival = await this.ptxService.fetchPtxBusEstimatedTimesOfArrival(city);
+    const ptxBusEstimatedTimeOfArrivalSet = await this.ptxService.fetchPtxBusEstimatedTimeOfArrivalSet(city);
 
-    return ptxBusEstimatedTimesOfArrival.map((ptxBusEstimatedTimeOfArrival) => ({
+    return ptxBusEstimatedTimeOfArrivalSet.map((ptxBusEstimatedTimeOfArrival) => ({
       id: ptxBusEstimatedTimeOfArrival.StopUID,
       routeId: ptxBusEstimatedTimeOfArrival.RouteUID,
       subRouteId: ptxBusEstimatedTimeOfArrival.SubRouteUID,

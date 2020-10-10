@@ -23,73 +23,73 @@ describe('PtxService', () => {
   });
 
   it('should fetchPtxDataVersion correctly', async () => {
-    const result = await service.fetchPtxDataVersion('Keelung');
-    expect(result).toBeDefined();
-    expect(result.VersionID).toBeDefined();
-    expect(result.UpdateTime).toBeDefined();
+    const ptxDataVersion = await service.fetchPtxDataVersion('Keelung');
+    expect(ptxDataVersion).toBeDefined();
+    expect(ptxDataVersion.VersionID).toBeDefined();
+    expect(ptxDataVersion.UpdateTime).toBeDefined();
   });
 
-  it('should fetchPtxBusRoutes correctly', async () => {
-    const result = await service.fetchPtxBusRoutes('Keelung');
-    expect(result).toBeDefined();
-    expect(result.length).toBeGreaterThan(0);
+  it('should fetchPtxBusRouteSet correctly', async () => {
+    const ptxBusRouteSet = await service.fetchPtxBusRouteSet('Keelung');
+    expect(ptxBusRouteSet).toBeDefined();
+    expect(ptxBusRouteSet.length).toBeGreaterThan(0);
 
-    const busRoute = result[0];
-    expect(busRoute.RouteUID).toBeDefined();
-    expect(busRoute.RouteName).toBeDefined();
-    expect(busRoute.SubRoutes).toBeDefined();
-    expect(busRoute.SubRoutes.length).toBeGreaterThan(0);
+    const ptxBusRoute = ptxBusRouteSet[0];
+    expect(ptxBusRoute.RouteUID).toBeDefined();
+    expect(ptxBusRoute.RouteName).toBeDefined();
+    expect(ptxBusRoute.SubRoutes).toBeDefined();
+    expect(ptxBusRoute.SubRoutes.length).toBeGreaterThan(0);
 
-    const subBusRoute = busRoute.SubRoutes[0];
-    expect(subBusRoute.SubRouteUID).toBeDefined();
-    expect(subBusRoute.SubRouteName).toBeDefined();
-    expect(subBusRoute.Direction).toBeDefined();
+    const ptxBusSubRoute = ptxBusRoute.SubRoutes[0];
+    expect(ptxBusSubRoute.SubRouteUID).toBeDefined();
+    expect(ptxBusSubRoute.SubRouteName).toBeDefined();
+    expect(ptxBusSubRoute.Direction).toBeDefined();
 
-    expect(busRoute.DepartureStopNameZh).toBeDefined();
-    expect(busRoute.DepartureStopNameEn).toBeDefined();
-    expect(busRoute.DestinationStopNameZh).toBeDefined();
-    expect(busRoute.DestinationStopNameEn).toBeDefined();
-    expect(busRoute.City).toBeDefined();
-    expect(busRoute.VersionID).toBeDefined();
+    expect(ptxBusRoute.DepartureStopNameZh).toBeDefined();
+    expect(ptxBusRoute.DepartureStopNameEn).toBeDefined();
+    expect(ptxBusRoute.DestinationStopNameZh).toBeDefined();
+    expect(ptxBusRoute.DestinationStopNameEn).toBeDefined();
+    expect(ptxBusRoute.City).toBeDefined();
+    expect(ptxBusRoute.VersionID).toBeDefined();
   });
 
-  it('should fetchPtxBusStopsOfRoute correctly', async () => {
-    const result = await service.fetchPtxBusStopsOfRoute('Keelung');
-    expect(result).toBeDefined();
-    expect(result.length).toBeGreaterThan(0);
+  it('should fetchPtxBusStopOfRouteSet correctly', async () => {
+    const ptxBusStopOfRouteSet = await service.fetchPtxBusStopOfRouteSet('Keelung');
+    expect(ptxBusStopOfRouteSet).toBeDefined();
+    expect(ptxBusStopOfRouteSet.length).toBeGreaterThan(0);
 
-    const busRoute = result[0];
-    expect(busRoute.RouteUID).toBeDefined();
-    expect(busRoute.RouteName).toBeDefined();
-    expect(busRoute.SubRouteUID).toBeDefined();
-    expect(busRoute.SubRouteName).toBeDefined();
-    expect(busRoute.Direction).toBeDefined();
-    expect(busRoute.City).toBeDefined();
-    expect(busRoute.Stops).toBeDefined();
-    expect(busRoute.Stops.length).toBeGreaterThan(0);
+    const ptxBusStopOfRoute = ptxBusStopOfRouteSet[0];
+    expect(ptxBusStopOfRoute.RouteUID).toBeDefined();
+    expect(ptxBusStopOfRoute.RouteName).toBeDefined();
+    expect(ptxBusStopOfRoute.SubRouteUID).toBeDefined();
+    expect(ptxBusStopOfRoute.SubRouteName).toBeDefined();
+    expect(ptxBusStopOfRoute.Direction).toBeDefined();
+    expect(ptxBusStopOfRoute.City).toBeDefined();
+    expect(ptxBusStopOfRoute.Stops).toBeDefined();
+    expect(ptxBusStopOfRoute.Stops.length).toBeGreaterThan(0);
 
-    const busStop = busRoute.Stops[0];
-    expect(busStop.StopUID).toBeDefined();
-    expect(busStop.StopName).toBeDefined();
-    expect(busStop.StopSequence).toBeDefined();
+    const ptxBusStop = ptxBusStopOfRoute.Stops[0];
+    expect(ptxBusStop.StopUID).toBeDefined();
+    expect(ptxBusStop.StopName).toBeDefined();
+    expect(ptxBusStop.StopSequence).toBeDefined();
 
-    expect(busRoute.VersionID).toBeDefined();
+    expect(ptxBusStopOfRoute.VersionID).toBeDefined();
   });
 
   it('should fetchPtxBusEstimatedTimeOfArrival correctly', async () => {
-    const result = await service.fetchPtxBusEstimatedTimesOfArrival('Keelung');
-    expect(result).toBeDefined();
-    expect(result.length).toBeGreaterThan(0);
+    const ptxBusEstimatedTimeOfArrivalSet = await service.fetchPtxBusEstimatedTimeOfArrivalSet('Keelung');
+    expect(ptxBusEstimatedTimeOfArrivalSet).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrivalSet.length).toBeGreaterThan(0);
 
-    const busStop = result[0];
-    expect(busStop.RouteUID).toBeDefined();
-    expect(busStop.RouteName).toBeDefined();
-    expect(busStop.SubRouteUID).toBeDefined();
-    expect(busStop.SubRouteName).toBeDefined();
-    expect(busStop.Direction).toBeDefined();
-    expect(busStop.StopUID).toBeDefined();
-    expect(busStop.StopName).toBeDefined();
-    expect(busStop.StopSequence).toBeDefined();
-    expect(busStop.StopStatus).toBeDefined();
+    const ptxBusEstimatedTimeOfArrival = ptxBusEstimatedTimeOfArrivalSet[0];
+    expect(ptxBusEstimatedTimeOfArrival.RouteUID).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.RouteName).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.SubRouteUID).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.SubRouteName).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.Direction).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.StopUID).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.StopName).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.StopSequence).toBeDefined();
+    expect(ptxBusEstimatedTimeOfArrival.StopStatus).toBeDefined();
   });
 });

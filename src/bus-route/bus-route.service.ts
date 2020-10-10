@@ -11,14 +11,14 @@ export class BusRouteService {
   ) { }
 
   async getBusRoutes(city: string) {
-    const [ptxBusRoutes, ptxBusStopsOfRoute] = await Promise.all([
-      await this.ptxService.fetchPtxBusRoutes(city),
-      await this.ptxService.fetchPtxBusStopsOfRoute(city),
+    const [ptxBusRouteSet, ptxBusStopOfRouteSet] = await Promise.all([
+      await this.ptxService.fetchPtxBusRouteSet(city),
+      await this.ptxService.fetchPtxBusStopOfRouteSet(city),
     ]);
 
     // 把 ptxBusStopsOfRoute 整理成 busStopDict
     let busStopDict = {} as { [subRouteId: string]: { [direction: string]: BusStop[] } };
-    ptxBusStopsOfRoute.map((ptxBusStopOfRoute) => {
+    ptxBusStopOfRouteSet.map((ptxBusStopOfRoute) => {
       const subRouteId = ptxBusStopOfRoute.SubRouteUID;
       const direction = ptxBusStopOfRoute.Direction;
       const stops = ptxBusStopOfRoute.Stops.map((ptxBusStop) => ({
@@ -35,7 +35,7 @@ export class BusRouteService {
       }
     });
 
-    return ptxBusRoutes.map((ptxBusRoute) => ({
+    return ptxBusRouteSet.map((ptxBusRoute) => ({
       id: ptxBusRoute.RouteUID,
       nameZhTw: ptxBusRoute.RouteName.Zh_tw,
       nameEn: ptxBusRoute.RouteName.En,
