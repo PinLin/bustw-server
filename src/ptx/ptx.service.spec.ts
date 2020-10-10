@@ -60,9 +60,7 @@ describe('PtxService', () => {
 
     const ptxBusStopOfRoute = ptxBusStopOfRouteSet[0];
     expect(ptxBusStopOfRoute.RouteUID).toBeDefined();
-    expect(ptxBusStopOfRoute.RouteName).toBeDefined();
     expect(ptxBusStopOfRoute.SubRouteUID).toBeDefined();
-    expect(ptxBusStopOfRoute.SubRouteName).toBeDefined();
     expect(ptxBusStopOfRoute.Direction).toBeDefined();
     expect(ptxBusStopOfRoute.City).toBeDefined();
     expect(ptxBusStopOfRoute.Stops).toBeDefined();
@@ -83,12 +81,9 @@ describe('PtxService', () => {
 
     const ptxBusEstimatedTimeOfArrival = ptxBusEstimatedTimeOfArrivalSet[0];
     expect(ptxBusEstimatedTimeOfArrival.RouteUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.RouteName).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.SubRouteUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.SubRouteName).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.Direction).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.StopName).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopSequence).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopStatus).toBeDefined();
   });
