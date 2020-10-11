@@ -5,6 +5,7 @@ import { PtxDataVersion } from './model/ptx-data-version.model';
 import { PtxBusRoute } from './model/ptx-bus-route.model';
 import { PtxBusStopOfRoute } from './model/ptx-bus-stop-of-route.model';
 import { PtxBusEstimatedTimeOfArrival } from './model/ptx-bus-estimated-time-of-arrival.model';
+import { PtxBusRealTimeNearStop } from './model/ptx-bus-real-time-near-stop.model';
 
 @Injectable()
 export class PtxService {
@@ -86,6 +87,19 @@ export class PtxService {
       return response.data as PtxBusEstimatedTimeOfArrival[];
     } catch (e) {
       this.logger.error(`Failed to fetch BusEstimatedTimeOfArrival of ${city}`);
+    }
+  }
+
+  async fetchPtxBusRealTimeNearStopSet(city: string) {
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/${this.getCityPath(city)}?$format=JSON`;
+    const headers = this.generateHeaders();
+
+    try {
+      const response = await this.httpService.get(url, { headers }).toPromise();
+      this.logger.log(`Fetched RealTimeNearStop of ${city}`);
+      return response.data as PtxBusRealTimeNearStop[];
+    } catch (e) {
+      this.logger.error(`Failed to fetch RealTimeNearStop of ${city}`);
     }
   }
 }

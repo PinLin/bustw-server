@@ -25,9 +25,8 @@ describe('BusStopService', () => {
 
     const busStop = busStops[0];
     expect(busStop.id).toBeDefined();
-    expect(busStop.subRouteId).toBeDefined();
-    expect(busStop.direction).toBeDefined();
     expect(busStop.status).toBeDefined();
     expect(busStop.estimateTime).toBeDefined();
+    expect(busStop.buses).toBeDefined();
   });
 });

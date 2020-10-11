@@ -87,4 +87,18 @@ describe('PtxService', () => {
     expect(ptxBusEstimatedTimeOfArrival.StopSequence).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopStatus).toBeDefined();
   });
+
+  it('should fetchPtxBusRealTimeNearStopSet correctly', async () => {
+    const ptxBusRealTimeNearStopSet = await service.fetchPtxBusRealTimeNearStopSet('Keelung');
+    expect(ptxBusRealTimeNearStopSet).toBeDefined();
+    expect(ptxBusRealTimeNearStopSet.length).toBeGreaterThan(0);
+
+    const ptxBusRealTimeNearStop = ptxBusRealTimeNearStopSet[0];
+    expect(ptxBusRealTimeNearStop.RouteUID).toBeDefined();
+    expect(ptxBusRealTimeNearStop.SubRouteUID).toBeDefined();
+    expect(ptxBusRealTimeNearStop.Direction).toBeDefined();
+    expect(ptxBusRealTimeNearStop.StopUID).toBeDefined();
+    expect(ptxBusRealTimeNearStop.BusStatus).toBeDefined();
+    expect(ptxBusRealTimeNearStop.A2EventType).toBeDefined();
+  });
 });
