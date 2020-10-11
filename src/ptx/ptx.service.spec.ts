@@ -81,10 +81,7 @@ describe('PtxService', () => {
 
     const ptxBusEstimatedTimeOfArrival = ptxBusEstimatedTimeOfArrivalSet[0];
     expect(ptxBusEstimatedTimeOfArrival.RouteUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.SubRouteUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.Direction).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopUID).toBeDefined();
-    expect(ptxBusEstimatedTimeOfArrival.StopSequence).toBeDefined();
     expect(ptxBusEstimatedTimeOfArrival.StopStatus).toBeDefined();
   });
 
@@ -95,8 +92,6 @@ describe('PtxService', () => {
 
     const ptxBusRealTimeNearStop = ptxBusRealTimeNearStopSet[0];
     expect(ptxBusRealTimeNearStop.RouteUID).toBeDefined();
-    expect(ptxBusRealTimeNearStop.SubRouteUID).toBeDefined();
-    expect(ptxBusRealTimeNearStop.Direction).toBeDefined();
     expect(ptxBusRealTimeNearStop.StopUID).toBeDefined();
     expect(ptxBusRealTimeNearStop.BusStatus).toBeDefined();
     expect(ptxBusRealTimeNearStop.A2EventType).toBeDefined();

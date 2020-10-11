@@ -46,7 +46,6 @@ export class BusStopService {
       return {
         id: stopId,
         routeId: ptxBusEstimatedTimeOfArrival.RouteUID,
-        sequence: ptxBusEstimatedTimeOfArrival.StopSequence,
         status: ptxBusEstimatedTimeOfArrival.StopStatus,
         estimateTime: ptxBusEstimatedTimeOfArrival.EstimateTime ?? null,
         buses: busDict?.[routeId]?.[stopId] ?? [],

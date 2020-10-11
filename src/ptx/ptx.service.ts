@@ -16,7 +16,7 @@ export class PtxService {
     private readonly httpService: HttpService,
   ) { }
 
-  generateHeaders() {
+  getAuthorizationHeaders() {
     const appId = this.configService.get<string>('PTX_APP_ID');
     const appKey = this.configService.get<string>('PTX_APP_KEY');
     const date = new Date();
@@ -38,9 +38,13 @@ export class PtxService {
     return `City/${city}`
   }
 
+  getFieldsQuery(fields: string[]) {
+    return '$select=' + fields.join(',');
+  }
+
   async fetchPtxDataVersion(city: string) {
     const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/DataVersion/${this.getCityPath(city)}?$format=JSON`;
-    const headers = this.generateHeaders();
+    const headers = this.getAuthorizationHeaders();
 
     try {
       const response = await this.httpService.get(url, { headers }).toPromise();
@@ -52,8 +56,9 @@ export class PtxService {
   }
 
   async fetchPtxBusRouteSet(city: string) {
-    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/${this.getCityPath(city)}?$format=JSON`;
-    const headers = this.generateHeaders();
+    const fields = ['RouteUID', 'RouteName', 'SubRoutes', 'DepartureStopNameZh', 'DepartureStopNameEn', 'DestinationStopNameZh', 'DestinationStopNameEn', 'City']
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/${this.getCityPath(city)}?$format=JSON&${this.getFieldsQuery(fields)}`;
+    const headers = this.getAuthorizationHeaders();
 
     try {
       const response = await this.httpService.get(url, { headers }).toPromise();
@@ -65,8 +70,9 @@ export class PtxService {
   }
 
   async fetchPtxBusStopOfRouteSet(city: string) {
-    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/${this.getCityPath(city)}?$format=JSON`;
-    const headers = this.generateHeaders();
+    const fields = ['RouteUID', 'SubRouteUID', 'Direction', 'City', 'Stops']
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/${this.getCityPath(city)}?$format=JSON&${this.getFieldsQuery(fields)}`;
+    const headers = this.getAuthorizationHeaders();
 
     try {
       const response = await this.httpService.get(url, { headers }).toPromise();
@@ -78,8 +84,9 @@ export class PtxService {
   }
 
   async fetchPtxBusEstimatedTimeOfArrivalSet(city: string) {
-    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/${this.getCityPath(city)}?$format=JSON`;
-    const headers = this.generateHeaders();
+    const fields = ['RouteUID', 'StopUID', 'EstimateTime', 'StopStatus'];
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/${this.getCityPath(city)}?$format=JSON&${this.getFieldsQuery(fields)}`;
+    const headers = this.getAuthorizationHeaders();
 
     try {
       const response = await this.httpService.get(url, { headers }).toPromise();
@@ -91,8 +98,9 @@ export class PtxService {
   }
 
   async fetchPtxBusRealTimeNearStopSet(city: string) {
-    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/${this.getCityPath(city)}?$format=JSON`;
-    const headers = this.generateHeaders();
+    const fields = ['PlateNumb', 'RouteUID', 'StopUID', 'BusStatus', 'A2EventType'];
+    const url = `https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/${this.getCityPath(city)}?$format=JSON&${this.getFieldsQuery(fields)}`;
+    const headers = this.getAuthorizationHeaders();
 
     try {
       const response = await this.httpService.get(url, { headers }).toPromise();
