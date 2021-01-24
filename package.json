@@ -1,10 +1,10 @@
 {
   "name": "bustw-server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.5.0",
+  "description": "Bus tracker for Taiwan",
+  "author": "Pin Lin <pinlin945@gmail.com>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
