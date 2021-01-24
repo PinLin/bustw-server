@@ -3,10 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PtxService } from './ptx.service';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    HttpModule,
-  ],
+  imports: [HttpModule],
   providers: [PtxService],
   exports: [PtxService],
 })
