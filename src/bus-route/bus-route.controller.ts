@@ -1,7 +1,7 @@
 import { Controller, Get, Param, ForbiddenException, BadGatewayException } from '@nestjs/common';
 import { BusRouteService } from './bus-route.service';
 
-@Controller('route')
+@Controller('routes')
 export class BusRouteController {
   constructor(
     private readonly busRouteService: BusRouteService,

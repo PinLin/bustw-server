@@ -1,7 +1,7 @@
 import { BadGatewayException, Controller, ForbiddenException, Get, Param } from '@nestjs/common';
 import { BusStopService } from './bus-stop.service';
 
-@Controller('stop')
+@Controller('stops')
 export class BusStopController {
   constructor(
     private readonly busStopService: BusStopService,
