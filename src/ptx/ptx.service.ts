@@ -12,13 +12,13 @@ export class PtxService {
   private readonly logger = new Logger(PtxService.name);
 
   constructor(
-    private readonly configService: ConfigService,
+    private readonly config: ConfigService,
     private readonly httpService: HttpService,
   ) { }
 
   getAuthorizationHeaders() {
-    const appId = this.configService.get<string>('PTX_APP_ID');
-    const appKey = this.configService.get<string>('PTX_APP_KEY');
+    const appId = this.config.get<string>('PTX_APP_ID');
+    const appKey = this.config.get<string>('PTX_APP_KEY');
     const date = new Date();
 
     const dateString = date.toUTCString();
